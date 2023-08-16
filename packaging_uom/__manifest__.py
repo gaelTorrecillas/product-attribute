@@ -10,7 +10,8 @@
     "website": "https://github.com/OCA/product-attribute",
     "summary": "Use uom in package",
     "depends": ["uom", "product"],
-    "data": ["views/product_packaging_views.xml"],
+    "data": ["views/product_packaging_views.xml",
+             "security/ir.model.access.csv"],
     "license": "AGPL-3",
     "installable": True,
 }
