@@ -33,22 +33,22 @@ class ProductPackaging(models.Model):
         default=lambda self: self._default_uom_categ_domain_id(),
         comodel_name="uom.category",
     )
-    qty = fields.Float(
-        compute="_compute_qty", inverse="_inverse_qty", store=True, readonly=False
-    )
+    # qty = fields.Float(
+    #     compute_sudo=True,compute="_compute_qty", inverse="_inverse_qty", store=True, readonly=False
+    # )
 
-    @api.depends("uom_id", "product_id", "product_id.uom_id")
-    def _compute_qty(self):
-        """
-        Compute the quantity by package based on uom
-        """
-        for packaging in self:
-            if packaging.uom_id and packaging.product_id:
-                packaging.qty = packaging.uom_id._compute_quantity(
-                    1, to_unit=packaging.product_id.uom_id
-                )
-            else:
-                packaging.qty = 1.0
+    # @api.depends("uom_id", "product_id", "product_id.uom_id")
+    # def _compute_qty(self):
+    #     """
+    #     Compute the quantity by package based on uom
+    #     """
+    #     for packaging in self:
+    #         if packaging.uom_id and packaging.product_id:
+    #             packaging.qty = packaging.uom_id._compute_quantity(
+    #                 1, to_unit=packaging.product_id.uom_id
+    #             )
+    #         else:
+    #             packaging.qty = 1.0
 
     @api.onchange("product_id")
     def onchange_product_id(self):
